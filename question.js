@@ -19,6 +19,6 @@ export const quizzInsolite = {
           "Elle développe des applications pour cultiver des potagers en apesanteur."
         ],
         correct_answer: "Elle milite pour l'éducation des jeunes filles en astronomie."
-      },
+      }
     ]
   };

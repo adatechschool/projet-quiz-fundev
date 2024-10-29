@@ -5,22 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiz insolite</title>
 <link rel="stylesheet" href="style.css">
-<script defer src="script.js"></script>
+<script defer src="question.js"></script>
+<script type="module" defer src="game.js"></script>
 </head>
 <body>
 	<div id="quiz-container">
-		<div class="question">
-		Combien font 2 + 2 ?
-		</div>
-		<div class="options">
-		  <button>22</button>
-		  <button>Je donne ma langue au chat.</button>
-		  <button>4</button>
-		  <button>Faut arrêter ces conneries de + ou de - ! Une fois pour toutes, le + suivant comment on est tourné, ça change tout !</button>
-		</div>
-		
-		 <div class="button-container">
-		  <button id="next-button">Suivant</button>
+		<div class="question" id="question-text"></div>
+		<div class="options" id="options-container"></div>
+		 
+		 <div class="buttons-container">
+		  <button id="next-button"></button>
 		</div>
 	</div>
 </body>
