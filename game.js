@@ -8,8 +8,9 @@ optionsContainer.innerHTML = "";
 let buttonNext = document.querySelector("#next-button");
 buttonNext.innerText = "suivant";
 
-let currentQuestionIndex = 0;
+let replayButton = document.querySelector('#replay-button');
 
+let currentQuestionIndex = 0;
 
 
 function loadQuestion() {
@@ -25,6 +26,7 @@ function loadQuestion() {
       });
 }
 
+  
   buttonNext.addEventListener('click', () => {
     currentQuestionIndex++;
     if ( currentQuestionIndex < quizzInsolite.questions.length) {
@@ -33,15 +35,17 @@ function loadQuestion() {
         questionContainer.innerText ="Fin du Quizz";
         optionsContainer.innerHTML = "";
         buttonNext.style.display = "none";
+        replayButton.style.display = "block";
       }
-});
+  });
+  
+  
+  replayButton.addEventListener('click', () => {
+    currentQuestionIndex = 0;
+    replayButton.style.display = "none";
+    buttonNext.style.display = "block";  
+    loadQuestion();
+  });
+
 
 loadQuestion();
-
-
-
-
-
-
-
-
