@@ -13,6 +13,8 @@ let currentQuestionIndex = 0;
 
 let bloquage = true;
 
+let score = 0;
+
 
 
 
@@ -48,7 +50,7 @@ buttonNext.addEventListener('click', () => {
     if ( currentQuestionIndex < quizzInsolite.questions.length) {
         loadQuestion();
       } else {
-        questionContainer.innerText ="Fin du Quizz";
+        questionContainer.innerText =` Fin du Quizz ! Tu as ${score} points !`;
         optionsContainer.innerHTML = "";
         buttonNext.style.display = "none";
         replayButton.style.display = "block";
@@ -72,6 +74,7 @@ function checkAnswer(boutonSelectionne, answers) {
     buttonNext.disabled = false;
     if (boutonSelectionne.innerText === answers) {
         boutonSelectionne.style.backgroundColor = "green";
+        score++;
     } else {
         boutonSelectionne.style.backgroundColor = "red";
     }
