@@ -9,10 +9,6 @@ buttonNext.innerText = "suivant";
 
 let replayButton = document.querySelector('#replay-button');
 
-let indexQuestion = 0;
-
-let answers = quizzInsolite.questions[indexQuestion].correct_answer;
-
 let currentQuestionIndex = 0;
 
 let bloquage = true;
