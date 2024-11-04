@@ -9,6 +9,8 @@ buttonNext.innerText = "suivant";
 
 let replayButton = document.querySelector('#replay-button');
 
+let affichageScore = document.querySelector("#afficheScore");
+
 let currentQuestionIndex = 0;
 
 let bloquage = true;
@@ -23,10 +25,11 @@ let score = 0;
 function loadQuestion() {
     optionsContainer.innerHTML = '';
     buttonNext.disabled = true;
+    
 
     let question = quizzInsolite.questions[currentQuestionIndex];
     questionContainer.innerText = question.text;
-
+    
     question.options.forEach(contenu => {
         const button = document.createElement('button');
         button.innerText = contenu;
@@ -40,13 +43,14 @@ function loadQuestion() {
             checkAnswer(button, question.correct_answer);}
 });
 
-      });
+   });
 }
 console.log(bloquage)
   
 buttonNext.addEventListener('click', () => {
     if (!bloquage) {
     currentQuestionIndex++;
+    affichageScore.innerHTML = `Ton score est de ${score} points !`
     if ( currentQuestionIndex < quizzInsolite.questions.length) {
         loadQuestion();
       } else {
@@ -65,6 +69,8 @@ buttonNext.addEventListener('click', () => {
     buttonNext.style.display = "block";  
     loadQuestion();
     bloquage = true;
+    score = 0;
+    affichageScore.innerHTML = `Ton score est de ${score} points !`
 });
 
 
@@ -75,6 +81,7 @@ function checkAnswer(boutonSelectionne, answers) {
     if (boutonSelectionne.innerText === answers) {
         boutonSelectionne.style.backgroundColor = "green";
         score++;
+        console.log("score",score);
     } else {
         boutonSelectionne.style.backgroundColor = "red";
     }
