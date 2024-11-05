@@ -17,6 +17,10 @@ let bloquage = true;
 
 let score = 0;
 
+affichageScore.innerHTML = `Ton score est de ${score} points !`
+
+buttonNext.style.display = "block";
+
 
 
 
@@ -66,7 +70,7 @@ buttonNext.addEventListener('click', () => {
   replayButton.addEventListener('click', () => {
     currentQuestionIndex = 0;
     replayButton.style.display = "none";
-    buttonNext.style.display = "block";  
+    buttonNext.style.display = "block";
     loadQuestion();
     bloquage = true;
     score = 0;
