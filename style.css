@@ -21,7 +21,7 @@ body{
         flex-grow: 1;
         gap: 1.5rem;
         margin-top: 4%;
-        margin-left: 11%;
+        place-self: center;
   }
 
 .option {
