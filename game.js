@@ -22,22 +22,33 @@ affichageScore.innerHTML = `Ton score est de ${score} points !`
 buttonNext.style.display = "block";
 
 let barProgress = 0;
-
 document.querySelector('#progress').setAttribute('value', barProgress);
 
+let timer = 30;
+
+document.querySelector('#timer').innerHTML = timer;
+
+let setTimer = setInterval(() => {
+    if (timer > 0)
+        timer--;
+    document.querySelector('#timer').innerHTML = timer;
+}, 1000);
 
 
+let timeout = setTimeout(() => {
+    bloquage = false;
+    buttonNext.disabled = false;
+}, 30000);
 
 
 
 function loadQuestion() {
-    optionsContainer.innerHTML = '';
-    buttonNext.disabled = true;
-    
-
     let question = quizzInsolite.questions[currentQuestionIndex];
     questionContainer.innerText = question.text;
-    
+
+    optionsContainer.innerHTML = '';
+    buttonNext.disabled = true;
+
     question.options.forEach(contenu => {
         const button = document.createElement('button');
         button.innerText = contenu;
@@ -46,34 +57,52 @@ function loadQuestion() {
 
         button.addEventListener("click", () => {
             if (bloquage) {
-            bloquage = false;
-            buttonNext.disabled = false;
-            checkAnswer(button, question.correct_answer);}
-});
-
-   });
+                bloquage = false;
+                buttonNext.disabled = false;
+                checkAnswer(button, question.correct_answer);
+            }
+        });
+    });
 }
-console.log(bloquage)
-  
+
+let manageTime = () =>
+{
+    clearTimeout(timeout);
+    clearInterval(setTimer);
+    timer = 30;
+    document.querySelector('#timer').innerHTML = timer;
+    timeout = setTimeout(() => {
+        bloquage = false;
+        buttonNext.disabled = false;
+    }, 30000);
+    setTimer = setInterval(() => {
+        if (timer > 0)
+            timer--;
+        document.querySelector('#timer').innerHTML = timer;
+    }, 1000);
+}
+
 buttonNext.addEventListener('click', () => {
     if (!bloquage) {
-    currentQuestionIndex++;
-    affichageScore.innerHTML = `Ton score est de ${score} points !`
-    if ( currentQuestionIndex < quizzInsolite.questions.length) {
-        loadQuestion();
-      } else {
-        questionContainer.innerText =` Fin du Quizz ! Tu as ${score} points !`;
-        optionsContainer.innerHTML = "";
-        buttonNext.style.display = "none";
-        replayButton.style.display = "block";
-      }
+        currentQuestionIndex++;
+        affichageScore.innerHTML = `Ton score est de ${score} points !`
+        if (currentQuestionIndex < quizzInsolite.questions.length)
+            loadQuestion();
+        else {
+            questionContainer.innerText =` Fin du Quizz ! Tu as ${score} points !`;
+            optionsContainer.innerHTML = "";
+            buttonNext.style.display = "none";
+            replayButton.style.display = "block";
+            document.querySelector('#timer').style.display = "none";
+        }
         bloquage = true;
         barProgress = (100 / 7) * currentQuestionIndex;
         document.querySelector('#progress').setAttribute('value', barProgress);
-  }});
-  
-  
-  replayButton.addEventListener('click', () => {
+        manageTime();
+    }
+});
+
+replayButton.addEventListener('click', () => {
     currentQuestionIndex = 0;
     replayButton.style.display = "none";
     buttonNext.style.display = "block";
@@ -84,19 +113,14 @@ buttonNext.addEventListener('click', () => {
 });
 
 
-
 function checkAnswer(boutonSelectionne, answers) {
     bloquage = false;
     buttonNext.disabled = false;
     if (boutonSelectionne.innerText === answers) {
         boutonSelectionne.classList.add('right');
-        // boutonSelectionne.style.backgroundColor = "green";
         score++;
-        console.log("score",score);
-    } else {
+    } else
         boutonSelectionne.classList.add("wrong");
-        // boutonSelectionne.style.backgroundColor = "red";
-    }
 }
 
 loadQuestion();

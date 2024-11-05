@@ -113,3 +113,9 @@ body{
         opacity: 0.9;
         border: #ffffff solid 3px;
     }
+
+    #timer {
+        color: white;
+        margin: auto;
+        text-align: right;
+    }
