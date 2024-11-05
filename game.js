@@ -21,6 +21,10 @@ affichageScore.innerHTML = `Ton score est de ${score} points !`
 
 buttonNext.style.display = "block";
 
+let barProgress = 0;
+
+document.querySelector('#progress').setAttribute('value', barProgress);
+
 
 
 
@@ -64,6 +68,8 @@ buttonNext.addEventListener('click', () => {
         replayButton.style.display = "block";
       }
         bloquage = true;
+        barProgress = (100 / 7) * currentQuestionIndex;
+        document.querySelector('#progress').setAttribute('value', barProgress);
   }});
   
   
