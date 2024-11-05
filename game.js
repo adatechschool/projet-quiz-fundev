@@ -79,11 +79,13 @@ function checkAnswer(boutonSelectionne, answers) {
     bloquage = false;
     buttonNext.disabled = false;
     if (boutonSelectionne.innerText === answers) {
-        boutonSelectionne.style.backgroundColor = "green";
+        boutonSelectionne.classList.add('right');
+        // boutonSelectionne.style.backgroundColor = "green";
         score++;
         console.log("score",score);
     } else {
-        boutonSelectionne.style.backgroundColor = "red";
+        boutonSelectionne.classList.add("wrong");
+        // boutonSelectionne.style.backgroundColor = "red";
     }
 }
 
