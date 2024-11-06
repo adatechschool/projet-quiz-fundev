@@ -35,7 +35,6 @@ let timeout = setTimeout(() => {
 }, 30000);
 
 
-
 function loadQuestion() {
     let question = quizzInsolite.questions[currentQuestionIndex];
     questionContainer.innerText = question.text;
@@ -96,7 +95,20 @@ let gifByScore = () =>              //fonction qui permet d'afficher un certain 
         document.querySelector('#gif').setAttribute('src', "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWhja3d1eXF4NWVmbGcybXV5YXp3eWF4dmRwN2pnNXdtMzd1YWkyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6MbhZORlagRIyHKw/giphy.webp")
 }
 
-
+let getConfetti = () =>             //fonction qui affiche des confetti
+{
+    confetti({
+        particleCount: 300,
+        spread: 90,
+        origin: { x: 1, y: 0.9 },
+    });
+    
+      confetti({
+        particleCount: 300,
+        spread: 90,
+        origin: { x: 0, y: 0.9 },
+    });
+}
 
 let endQuizz = () =>            //fonction qui va tout réinitialiser pour relancer le quizz dès le départ
 {
@@ -106,6 +118,7 @@ let endQuizz = () =>            //fonction qui va tout réinitialiser pour relan
     replayButton.style.display = "block";
     document.querySelector('#timer').style.display = "none";
     gifByScore();
+    getConfetti();
 }
 
 
