@@ -118,6 +118,7 @@ let endQuizz = () =>            //fonction qui va tout réinitialiser pour relan
     replayButton.style.display = "block";
     document.querySelector('#timer').style.display = "none";
     gifByScore();
+    document.querySelector('#gif').style.display = "block";
     getConfetti();
 }
 
@@ -151,6 +152,7 @@ replayButton.addEventListener('click', () => {          //fonction qui va tout r
     loadQuestion();
     bloquage = true;
     score = 0;
+    document.querySelector('#gif').style.display = "none";
     affichageScore.innerHTML = `Ton score est de ${score} points !`
 });
 
