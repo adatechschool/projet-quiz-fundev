@@ -8,20 +8,24 @@
 <script type="module" defer src="question.js"></script>
 <script type="module" defer src="game.js"></script>
 </head>
+
 <body>
 	<h1 id="timer"></h1>
+
 	<div id="quiz-container">
 		<div class="question" id="question-text"></div>
 		<div class="options" id="options-container"></div>
+        <progress id="progress" max="100"></progress>
 
-		<div class="button-container">			
+
+	  <div class="button-container">			
 			<button id="next-button"></button>
 			<button id="replay-button" style="display: none;">Rejouer</button> 
 			</div>			
 		</div>
 
-		<div id="afficheScore"></div>
-		<progress id="progress" max="100"></progress>
+      <div id="afficheScore"></div>
+		
 
 	</div>
 </body>

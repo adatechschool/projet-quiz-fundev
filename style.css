@@ -117,5 +117,20 @@ body{
     #timer {
         color: white;
         margin: auto;
-        text-align: right;
+        text-align: center;
+        background-color: #17202a;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        position: fixed;
+        right: 30px;
+        top: 5px;
+    }
+
+    #progress {
+        display: grid;
+        width: 400px;
+        height: 30px;
+        margin: auto;
+        margin-top: 50px;
     }
