@@ -1,32 +1,25 @@
+// LES VARIABLES
+
 import { quizzInsolite } from './question.js';
-
 let questionContainer = document.querySelector(".question");
-
 let optionsContainer = document.querySelector(".options"); 
-
 let buttonNext = document.querySelector("#next-button");
 buttonNext.innerText = "suivant";
-
 let replayButton = document.querySelector('#replay-button');
-
 let affichageScore = document.querySelector("#afficheScore");
-
 let currentQuestionIndex = 0;
-
 let bloquage = true;    //variable pour bloquer le fait de cliquer sur le bouton next ou sur les options
-
 let score = 0;
-
 affichageScore.innerHTML = `Ton score est de ${score} points !`
-
 buttonNext.style.display = "block";
-
 let barProgress = 0;
 document.querySelector('#progress').setAttribute('value', barProgress); //injecter une valeur a la bar de progrès
-
 let timer = 30;
-
 document.querySelector('#timer').innerHTML = timer; //afficher le timer dans la page html
+
+
+
+// LES FONCTIONS
 
 let setTimer = setInterval(() => {
     if (timer > 0)
@@ -35,10 +28,13 @@ let setTimer = setInterval(() => {
 }, 1000);                                                           //on met 1000 car c'est en millisecondes
 
 
+
 let timeout = setTimeout(() => {
     bloquage = false;
     buttonNext.disabled = false;            //fonction créer un timer de 30 secondes, si on ne repond pas avant la fin il bloque les réponses
 }, 30000);
+
+
 
 function loadQuestion() {
     let question = quizzInsolite.questions[currentQuestionIndex];
@@ -63,6 +59,8 @@ function loadQuestion() {
     });
 }
 
+
+
 let manageTime = () =>                          //fonction qui va reset les 2 timers avec leurs valeurs et les relancer
 {
     clearTimeout(timeout);
@@ -80,6 +78,8 @@ let manageTime = () =>                          //fonction qui va reset les 2 ti
     }, 1000);
 }
 
+
+
 let gifByScore = () =>              //fonction qui permet d'afficher un certain gif par rapport au score
 {
     if (score === 0)
@@ -96,6 +96,8 @@ let gifByScore = () =>              //fonction qui permet d'afficher un certain 
         document.querySelector('#gif').setAttribute('src', "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWhja3d1eXF4NWVmbGcybXV5YXp3eWF4dmRwN2pnNXdtMzd1YWkyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6MbhZORlagRIyHKw/giphy.webp")
 }
 
+
+
 let endQuizz = () =>            //fonction qui va tout réinitialiser pour relancer le quizz dès le départ
 {
     questionContainer.innerText =` Fin du Quizz ! Tu as ${score} points !`;
@@ -105,6 +107,8 @@ let endQuizz = () =>            //fonction qui va tout réinitialiser pour relan
     document.querySelector('#timer').style.display = "none";
     gifByScore();
 }
+
+
 
 buttonNext.addEventListener('click', () => {                    //fonction qui va detecter le click sur le bouton suivant et passer a la prochaine question
     if (!bloquage) {        //check si on a bien deja repondu a la question
@@ -121,6 +125,8 @@ buttonNext.addEventListener('click', () => {                    //fonction qui v
     }
 });
 
+
+
 replayButton.addEventListener('click', () => {          //fonction qui va tout reset et nous renvoyer au debut du quizz
     currentQuestionIndex = 0;
     replayButton.style.display = "none";
@@ -136,6 +142,8 @@ replayButton.addEventListener('click', () => {          //fonction qui va tout r
 });
 
 
+
+
 function checkAnswer(boutonSelectionne, answers) {         //fonction qui va check si la reponse est bonne ou pas
     bloquage = false;
     buttonNext.disabled = false;
@@ -146,4 +154,6 @@ function checkAnswer(boutonSelectionne, answers) {         //fonction qui va che
         boutonSelectionne.classList.add("wrong");       //la reponse devient rouge car la classe wrong a comme attribut cette couleur (fausse réponse)
 }
 
-loadQuestion(); //fonction principale qui regroupe toutes les fonctions
+
+
+loadQuestion(); //fonction principale qui regroupe toutes les fonctions, à appeler à la fin !
