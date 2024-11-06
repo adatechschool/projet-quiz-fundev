@@ -40,8 +40,6 @@ let timeout = setTimeout(() => {
     buttonNext.disabled = false;            //fonction créer un timer de 30 secondes, si on ne repond pas avant la fin il bloque les réponses
 }, 30000);
 
-
-
 function loadQuestion() {
     let question = quizzInsolite.questions[currentQuestionIndex];
     questionContainer.innerText = question.text;
@@ -82,21 +80,42 @@ let manageTime = () =>                          //fonction qui va reset les 2 ti
     }, 1000);
 }
 
+let gifByScore = () =>              //fonction qui permet d'afficher un certain gif par rapport au score
+{
+    if (score === 0)
+        document.querySelector('#gif').setAttribute('src', "https://media1.tenor.com/m/iAooOO3wBt0AAAAd/nul-homer.gif");
+    else if (score <= 5)
+        document.querySelector('#gif').setAttribute('src', "https://media1.tenor.com/m/_IT4iiUqkw4AAAAd/homer-simpson-les-simpson.gif");
+    else if (score <= 10)
+        document.querySelector('#gif').setAttribute('src', "https://media1.tenor.com/m/7zg2nZnGU-QAAAAd/the-office-the.gif");
+    else if (score >= 11 && score <= 15)
+        document.querySelector('#gif').setAttribute('src', "https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2016/05/Simpsons.gif");
+    else if (score >= 16 && score <= 19)
+        document.querySelector('#gif').setAttribute('src', "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnllenJ0Z25tZTU3eGFyNGVoZXd3OXl2YXlyd2MwMWphemQ2Njl5cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0amJzVHIAfl7jMDos/giphy.webp");
+    else if (score === 20)
+        document.querySelector('#gif').setAttribute('src', "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWhja3d1eXF4NWVmbGcybXV5YXp3eWF4dmRwN2pnNXdtMzd1YWkyYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6MbhZORlagRIyHKw/giphy.webp")
+}
+
+let endQuizz = () =>            //fonction qui va tout réinitialiser pour relancer le quizz dès le départ
+{
+    questionContainer.innerText =` Fin du Quizz ! Tu as ${score} points !`;
+    optionsContainer.innerHTML = "";
+    buttonNext.style.display = "none";
+    replayButton.style.display = "block";
+    document.querySelector('#timer').style.display = "none";
+    gifByScore();
+}
+
 buttonNext.addEventListener('click', () => {                    //fonction qui va detecter le click sur le bouton suivant et passer a la prochaine question
     if (!bloquage) {        //check si on a bien deja repondu a la question
         currentQuestionIndex++;
         affichageScore.innerHTML = `Ton score est de ${score} points !`
         if (currentQuestionIndex < quizzInsolite.questions.length)
             loadQuestion();
-        else {                                                  //check si on est bien arrivé a la fin du quizz
-            questionContainer.innerText =` Fin du Quizz ! Tu as ${score} points !`;
-            optionsContainer.innerHTML = "";
-            buttonNext.style.display = "none";
-            replayButton.style.display = "block";
-            document.querySelector('#timer').style.display = "none";
-        }
+        else                                                         //check si on est bien arrivé a la fin du quizz
+            endQuizz();
         bloquage = true;
-        barProgress = (100 / 7) * currentQuestionIndex;                             //incrémentation de la bar de progression
+        barProgress = (100 / 20) * currentQuestionIndex;                             //incrémentation de la bar de progression
         document.querySelector('#progress').setAttribute('value', barProgress);
         manageTime();
     }
@@ -106,7 +125,7 @@ replayButton.addEventListener('click', () => {          //fonction qui va tout r
     currentQuestionIndex = 0;
     replayButton.style.display = "none";
     buttonNext.style.display = "block";
-    barProgress = (100 / 7) * currentQuestionIndex;
+    barProgress = (100 / 20) * currentQuestionIndex;
     document.querySelector('#progress').setAttribute('value', barProgress);
     manageTime();
     document.querySelector('#timer').style.display = "block";

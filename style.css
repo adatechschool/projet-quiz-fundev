@@ -134,3 +134,11 @@ body{
         margin: auto;
         margin-top: 50px;
     }
+
+    #gif {
+        display: grid;
+        margin: auto;
+        margin-top: 20px;
+        width: 400px;
+        height: auto;
+    }
